@@ -4,10 +4,10 @@ Implemented:
 
 - Jump
 - Killzone (Automatic)
+- Dash
 
 Not Implemented
 
-- Dash
 - ??
 - ???
 - Graphics (Provisional ones are in place)
