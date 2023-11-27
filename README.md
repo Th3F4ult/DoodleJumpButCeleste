@@ -4,7 +4,7 @@ Implemented:
 
 - Jump
 - Killzone (Automatic)
-- Dash
+- Dash (Now indidicates when it's ready to use)
 
 Not Implemented
 
