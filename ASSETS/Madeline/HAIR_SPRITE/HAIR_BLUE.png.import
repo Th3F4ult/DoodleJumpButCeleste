@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bne2ngtl8c2ib"
-path="res://.godot/imported/3.png-4abbbaebe4bbbe169a293cde600848ab.ctex"
+uid="uid://cli42e5p4bdt5"
+path="res://.godot/imported/HAIR_BLUE.png-ab734de87a6072c45d924dc1b5c24270.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://ASSETS/Madeline/IdleAnim/3.png"
-dest_files=["res://.godot/imported/3.png-4abbbaebe4bbbe169a293cde600848ab.ctex"]
+source_file="res://ASSETS/Madeline/HAIR_SPRITE/HAIR_BLUE.png"
+dest_files=["res://.godot/imported/HAIR_BLUE.png-ab734de87a6072c45d924dc1b5c24270.ctex"]
 
 [params]
 

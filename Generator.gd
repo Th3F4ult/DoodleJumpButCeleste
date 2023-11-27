@@ -5,6 +5,8 @@ var y = 1000
 
 
 func _process(delta):
+	$Points.position.y = $Madeline.position.y - 200
+	$Points.text = str(Global.Points)
 	if Global.GenTimes > 0:
 		other = preload("res://platform_normal.tscn").instantiate()
 		other.position.x = rng.randf_range(100,200)
@@ -13,3 +15,5 @@ func _process(delta):
 		y = y - 150
 		Global.GenTimes = Global.GenTimes - 1
 		print(Global.GenTimes)
+
+

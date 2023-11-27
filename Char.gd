@@ -10,11 +10,10 @@ var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 func _ready():
 	add_to_group("player")
 	$DashParts.emitting = false
-	Anim.play("NOSTART")
-	
+	$HairBlue.visible = false
 
 func _physics_process(delta):
-
+	print(velocity.y)
 	if not is_on_floor():
 		velocity.y += gravity * delta
 
@@ -28,6 +27,7 @@ func _physics_process(delta):
 		velocity.y = JUMP_VELOCITY * 2
 		Global.GenTimes = Global.GenTimes + 3
 		$DashParts.emitting = true
+		$HairBlue.visible = true
 		
 		
 
@@ -41,13 +41,17 @@ func _physics_process(delta):
 	if velocity.y <= 0:
 		$"../KillArea".position.y = position.y + 300
 		$Track.limit_bottom = position.y + 300
+		Anim.play("NOSTART")
+
 	if velocity.y >= 0:
 		$DashParts.emitting = false
-	
-	
+		Anim.play("Falling_CanDash")
+
 	if TimerLock:
 		$"../TimeToDash".start()
 		TimerLock = false
+
+
 
 
 
@@ -61,3 +65,4 @@ func _on_kill_area_body_entered(body):
 
 func _on_time_to_dash_timeout():
 		CanDash = true
+		$HairBlue.visible = false

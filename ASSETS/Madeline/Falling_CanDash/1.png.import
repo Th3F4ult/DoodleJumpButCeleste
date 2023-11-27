@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://52fhphsrttkc"
-path="res://.godot/imported/4.png-61f197acc98753258685da7318c097c5.ctex"
+uid="uid://btwoohibbl6bg"
+path="res://.godot/imported/1.png-fe1d970ae387e558fce540d5897eafb8.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://ASSETS/Madeline/IdleAnim/4.png"
-dest_files=["res://.godot/imported/4.png-61f197acc98753258685da7318c097c5.ctex"]
+source_file="res://ASSETS/Madeline/Falling_CanDash/1.png"
+dest_files=["res://.godot/imported/1.png-fe1d970ae387e558fce540d5897eafb8.ctex"]
 
 [params]
 
