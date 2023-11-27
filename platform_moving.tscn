@@ -34,17 +34,14 @@ curve = SubResource("Curve2D_drgrq")
 [node name="PathFollow2D" type="PathFollow2D" parent="Path2D"]
 position = Vector2(292.706, -3.8147e-07)
 rotation = 3.14159
-scale = Vector2(1, 1)
 
 [node name="Platform" type="Sprite2D" parent="Path2D/PathFollow2D"]
 position = Vector2(46.1177, -1.43051e-05)
 rotation = 3.14159
-scale = Vector2(1, 1)
 texture = ExtResource("2_pgg7c")
 
 [node name="StaticBody2D" type="StaticBody2D" parent="Path2D/PathFollow2D"]
 position = Vector2(-453.647, 3.91006e-05)
-scale = Vector2(1, 1)
 script = ExtResource("2_lwcei")
 
 [node name="HitboxThru" type="CollisionShape2D" parent="Path2D/PathFollow2D/StaticBody2D"]

@@ -13,7 +13,9 @@ func _ready():
 	$HairBlue.visible = false
 
 func _physics_process(delta):
-
+	if Global.boost:
+		Global.boost = false
+		velocity.y = JUMP_VELOCITY * 5
 	if not is_on_floor():
 		velocity.y += gravity * delta
 
@@ -61,6 +63,7 @@ func _on_kill_area_body_entered(body):
 		queue_free()
 		get_tree().change_scene_to_file("res://level.tscn")
 		Global.GenTimes = 10
+
 
 
 func _on_time_to_dash_timeout():

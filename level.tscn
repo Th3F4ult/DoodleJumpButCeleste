@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://qdjn2s2lffht"]
+[gd_scene load_steps=18 format=3 uid="uid://qdjn2s2lffht"]
 
 [ext_resource type="Script" path="res://Generator.gd" id="1_heciy"]
 [ext_resource type="Script" path="res://Char.gd" id="2_insj0"]
@@ -6,6 +6,8 @@
 [ext_resource type="Texture2D" uid="uid://dx2uigygj2at1" path="res://ASSETS/Madeline/IdleAnim/0.png" id="4_p3y8s"]
 [ext_resource type="Texture2D" uid="uid://btwoohibbl6bg" path="res://ASSETS/Madeline/Falling_CanDash/1.png" id="5_gk2jx"]
 [ext_resource type="Texture2D" uid="uid://cli42e5p4bdt5" path="res://ASSETS/Madeline/HAIR_SPRITE/HAIR_BLUE.png" id="6_b6ekg"]
+[ext_resource type="PackedScene" uid="uid://dm41xwsjfjowx" path="res://booster_plat.tscn" id="7_1e30t"]
+[ext_resource type="PackedScene" uid="uid://cbabktybhb0y6" path="res://strawberry.tscn" id="8_6yx6k"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_t1mqt"]
 size = Vector2(213, 29)
@@ -18,7 +20,6 @@ normal = Vector2(1, 0)
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_7mkma"]
 normal = Vector2(-1, 0)
-distance = -2.0
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_y02ky"]
 texture = ExtResource("2_q82lm")
@@ -115,8 +116,8 @@ shape = SubResource("RectangleShape2D_65ria")
 
 [node name="DashParts" type="CPUParticles2D" parent="Madeline"]
 position = Vector2(0, 14)
+scale = Vector2(1.8, 1.8)
 amount = 2000
-lifetime = 0.3
 emission_shape = 3
 emission_rect_extents = Vector2(8, -1)
 color = Color(0.4, 0.721569, 0.858824, 1)
@@ -134,6 +135,12 @@ texture = ExtResource("6_b6ekg")
 [node name="TimeToDash" type="Timer" parent="."]
 wait_time = 3.0
 one_shot = true
+
+[node name="BoosterPlat" parent="." instance=ExtResource("7_1e30t")]
+position = Vector2(52, 1134)
+
+[node name="Strawberry" parent="." instance=ExtResource("8_6yx6k")]
+position = Vector2(51, 1009)
 
 [connection signal="body_entered" from="KillArea" to="Madeline" method="_on_kill_area_body_entered"]
 [connection signal="timeout" from="TimeToDash" to="Madeline" method="_on_time_to_dash_timeout"]

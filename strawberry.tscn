@@ -1,0 +1,81 @@
+[gd_scene load_steps=15 format=3 uid="uid://cbabktybhb0y6"]
+
+[ext_resource type="Script" path="res://Strawberry.gd" id="1_cggog"]
+[ext_resource type="Texture2D" uid="uid://cbjwhf7cbysj5" path="res://ASSETS/Strawb/Grab/0.png" id="2_l2sos"]
+[ext_resource type="Texture2D" uid="uid://u70kqa8v1icv" path="res://ASSETS/Strawb/Idle/0.png" id="2_opnwi"]
+[ext_resource type="Texture2D" uid="uid://hl3tyr8yaexd" path="res://ASSETS/Strawb/Grab/1.png" id="3_k7su4"]
+[ext_resource type="Texture2D" uid="uid://dk7qic7axdvkf" path="res://ASSETS/Strawb/Idle/1.png" id="3_x4ghc"]
+[ext_resource type="Texture2D" uid="uid://ia4wv8loduqw" path="res://ASSETS/Strawb/Idle/2.png" id="4_akyxe"]
+[ext_resource type="Texture2D" uid="uid://p7q4i2rtyf8m" path="res://ASSETS/Strawb/Grab/2.png" id="4_sfs7o"]
+[ext_resource type="Texture2D" uid="uid://cfbmdpvyhlphk" path="res://ASSETS/Strawb/Idle/3.png" id="5_e8dgj"]
+[ext_resource type="Texture2D" uid="uid://c2ve76s213o4g" path="res://ASSETS/Strawb/Grab/3.png" id="5_gxk3d"]
+[ext_resource type="Texture2D" uid="uid://dafiij0qct1o1" path="res://ASSETS/Strawb/Idle/4.png" id="6_ss0gb"]
+[ext_resource type="Texture2D" uid="uid://5yu0eupouro6" path="res://ASSETS/Strawb/Grab/4.png" id="6_vyq6t"]
+[ext_resource type="Texture2D" uid="uid://vl0c0xd2vlwl" path="res://ASSETS/Strawb/Idle/5.png" id="7_bplah"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_mweps"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_l2sos")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_k7su4")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_sfs7o")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_gxk3d")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_vyq6t")
+}],
+"loop": false,
+"name": &"Grab",
+"speed": 8.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_opnwi")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_x4ghc")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_akyxe")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_e8dgj")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_ss0gb")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_bplah")
+}],
+"loop": true,
+"name": &"Idle",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4n1u3"]
+size = Vector2(41, 20)
+
+[node name="Strawberry" type="Node2D"]
+script = ExtResource("1_cggog")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+scale = Vector2(0.5, 0.5)
+sprite_frames = SubResource("SpriteFrames_mweps")
+animation = &"Grab"
+frame = 4
+frame_progress = 1.0
+
+[node name="StrawArea" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StrawArea"]
+position = Vector2(0.5, 0)
+shape = SubResource("RectangleShape2D_4n1u3")
+
+[connection signal="body_entered" from="StrawArea" to="." method="_on_straw_area_body_entered"]
