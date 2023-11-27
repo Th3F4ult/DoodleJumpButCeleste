@@ -13,7 +13,7 @@ func _ready():
 	$HairBlue.visible = false
 
 func _physics_process(delta):
-	print(velocity.y)
+
 	if not is_on_floor():
 		velocity.y += gravity * delta
 

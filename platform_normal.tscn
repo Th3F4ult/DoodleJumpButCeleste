@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://care0f10b0g6j"]
 
 [ext_resource type="Script" path="res://platform_normal.gd" id="1_vgyih"]
-[ext_resource type="Texture2D" uid="uid://c531ios1tresp" path="res://icon.svg" id="2_iuwuo"]
+[ext_resource type="Texture2D" uid="uid://4hnhq3osinw3" path="res://ASSETS/Platforms/Regular-1/0.png" id="2_b3uh4"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_qm72o"]
 size = Vector2(51, 20)
@@ -12,15 +12,15 @@ size = Vector2(536, 20)
 [node name="Platform-Normal" type="StaticBody2D"]
 script = ExtResource("1_vgyih")
 
+[node name="Sprite" type="Sprite2D" parent="."]
+position = Vector2(1.5, 2.38419e-07)
+scale = Vector2(0.53125, 0.625)
+texture = ExtResource("2_b3uh4")
+
 [node name="HitboxThru" type="CollisionShape2D" parent="."]
 position = Vector2(1.5, 0)
 shape = SubResource("RectangleShape2D_qm72o")
 one_way_collision = true
-
-[node name="Icon" type="Sprite2D" parent="."]
-position = Vector2(1.27679, -0.122314)
-scale = Vector2(0.401925, 0.158161)
-texture = ExtResource("2_iuwuo")
 
 [node name="PointAdder" type="Area2D" parent="."]
 
