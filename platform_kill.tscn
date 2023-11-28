@@ -1,0 +1,21 @@
+[gd_scene load_steps=4 format=3 uid="uid://d1btg6jvjugfb"]
+
+[ext_resource type="Script" path="res://KillZone.gd" id="1_3egmh"]
+[ext_resource type="Texture2D" uid="uid://c5ujxoy0ti7d2" path="res://ASSETS/Platforms/Kill-1/0.png" id="2_m3lw4"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_umm7d"]
+size = Vector2(96, 72)
+
+[node name="KillZone" type="Area2D"]
+script = ExtResource("1_3egmh")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -2)
+scale = Vector2(0.5, 0.5)
+shape = SubResource("RectangleShape2D_umm7d")
+
+[node name="0" type="Sprite2D" parent="."]
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("2_m3lw4")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
