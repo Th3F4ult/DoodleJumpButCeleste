@@ -9,8 +9,8 @@ func _ready():
 	pass
 	# We will need this for later, assist mode stuff
 func _process(delta):
-	$Points.position.y = $Madeline.position.y - 200
-	$Points.text = str(Global.Points)
+	$Y_MOVABLE.position.y = $Madeline.position.y - 200
+	$Y_MOVABLE/Points.text = str(Global.Points)
 	if Global.GenTimes > 0:
 		print(NextPlat)
 		NextPlat = rng.randf_range(1,100)
