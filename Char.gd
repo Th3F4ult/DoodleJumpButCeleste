@@ -63,6 +63,7 @@ func _on_kill_area_body_entered(body):
 		queue_free()
 		get_tree().change_scene_to_file("res://level.tscn")
 		Global.GenTimes = 10
+		Global.Points = 0
 
 
 
