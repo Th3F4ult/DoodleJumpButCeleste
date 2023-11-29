@@ -15,3 +15,4 @@ func _on_straw_area_body_entered(body):
 	if body.is_in_group("player"):
 		a.play("Grab")
 		$StrawArea.queue_free()
+		Global.StrawBs = Global.StrawBs + 1

@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://qdjn2s2lffht"]
+[gd_scene load_steps=18 format=3 uid="uid://qdjn2s2lffht"]
 
 [ext_resource type="Script" path="res://Generator.gd" id="1_heciy"]
 [ext_resource type="Script" path="res://Char.gd" id="2_insj0"]
@@ -6,8 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://dx2uigygj2at1" path="res://ASSETS/Madeline/IdleAnim/0.png" id="4_p3y8s"]
 [ext_resource type="Texture2D" uid="uid://btwoohibbl6bg" path="res://ASSETS/Madeline/Falling_CanDash/1.png" id="5_gk2jx"]
 [ext_resource type="Texture2D" uid="uid://cli42e5p4bdt5" path="res://ASSETS/Madeline/HAIR_SPRITE/HAIR_BLUE.png" id="6_b6ekg"]
-[ext_resource type="PackedScene" uid="uid://dm41xwsjfjowx" path="res://booster_plat.tscn" id="7_1e30t"]
-[ext_resource type="PackedScene" uid="uid://cbabktybhb0y6" path="res://strawberry.tscn" id="8_6yx6k"]
+[ext_resource type="Texture2D" uid="uid://dbgi34iphaxt2" path="res://ASSETS/Strawb/UI/0.png" id="7_2elfg"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_t1mqt"]
 size = Vector2(213, 29)
@@ -52,8 +51,15 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="LabelSettings" id="LabelSettings_eoosq"]
+font_size = 32
+font_color = Color(0, 0, 0, 1)
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_8d8lf"]
 size = Vector2(20, 1812)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_fmb7u"]
+size = Vector2(255, 20)
 
 [node name="Level" type="Node2D"]
 script = ExtResource("1_heciy")
@@ -80,6 +86,7 @@ position = Vector2(108, 1129)
 script = ExtResource("2_insj0")
 
 [node name="Track" type="Camera2D" parent="Madeline"]
+process_mode = 3
 position = Vector2(3, -40)
 zoom = Vector2(3, 3)
 limit_left = 0
@@ -113,21 +120,27 @@ texture = ExtResource("6_b6ekg")
 wait_time = 3.0
 one_shot = true
 
-[node name="BoosterPlat" parent="." instance=ExtResource("7_1e30t")]
-position = Vector2(52, 1134)
-
-[node name="Strawberry" parent="." instance=ExtResource("8_6yx6k")]
-position = Vector2(51, 1009)
-
 [node name="Y_MOVABLE" type="Node2D" parent="."]
 position = Vector2(0, 825)
 
+[node name="STRAW_BERRY_UI" type="Sprite2D" parent="Y_MOVABLE"]
+position = Vector2(38, 72)
+texture = ExtResource("7_2elfg")
+
 [node name="Points" type="Label" parent="Y_MOVABLE"]
-offset_left = 9.0
-offset_top = 65.0
-offset_right = 84.0
-offset_bottom = 91.0
+offset_left = 12.0
+offset_top = 23.0
+offset_right = 87.0
+offset_bottom = 49.0
 text = "fasfasfasf"
+
+[node name="StrawberryDisplay" type="Label" parent="Y_MOVABLE"]
+offset_left = 70.0
+offset_top = 47.0
+offset_right = 278.0
+offset_bottom = 95.0
+text = "Strawberries:"
+label_settings = SubResource("LabelSettings_eoosq")
 
 [node name="Blockers" type="StaticBody2D" parent="Y_MOVABLE"]
 position = Vector2(0, -817)
@@ -140,5 +153,129 @@ shape = SubResource("RectangleShape2D_8d8lf")
 position = Vector2(226, 898)
 shape = SubResource("RectangleShape2D_8d8lf")
 
+[node name="PAUSEBTN" type="Button" parent="Y_MOVABLE"]
+process_mode = 3
+offset_left = 126.0
+offset_right = 208.0
+offset_bottom = 46.0
+text = "PAUSE"
+
+[node name="Strawberry Gen" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Strawberry Gen"]
+position = Vector2(109.5, 984)
+shape = SubResource("RectangleShape2D_fmb7u")
+
+[node name="Pause_Menu_1_Cam" type="Camera2D" parent="."]
+position = Vector2(-349, 1058)
+zoom = Vector2(3, 3)
+
+[node name="PAUSEBTN2" type="Button" parent="Pause_Menu_1_Cam"]
+process_mode = 3
+offset_left = 26.0
+offset_top = -192.0
+offset_right = 108.0
+offset_bottom = -146.0
+text = "Resume"
+
+[node name="ASSist" type="Button" parent="Pause_Menu_1_Cam"]
+process_mode = 3
+offset_left = -85.0
+offset_top = -97.0
+offset_right = -77.0
+offset_bottom = -89.0
+text = "Assist Mode Options"
+
+[node name="Assist_Options_cam" type="Camera2D" parent="."]
+process_mode = 3
+position = Vector2(-632, 1039)
+zoom = Vector2(2, 2)
+
+[node name="Assist_Engine_Speed" type="HSlider" parent="Assist_Options_cam"]
+process_mode = 3
+offset_left = 2.0
+offset_top = -144.0
+offset_right = 144.0
+offset_bottom = -128.0
+max_value = 5.0
+tick_count = 5
+
+[node name="Assist_Speed_Text" type="Label" parent="Assist_Options_cam/Assist_Engine_Speed"]
+layout_mode = 0
+offset_left = -148.0
+offset_top = -4.0
+offset_right = -108.0
+offset_bottom = 19.0
+text = "GAMESPEED"
+
+[node name="Assist_Engine_Explanation" type="Label" parent="Assist_Options_cam/Assist_Engine_Speed"]
+layout_mode = 0
+offset_left = -145.0
+offset_top = -46.0
+offset_right = -43.0
+offset_bottom = -20.0
+text = "Game Speed:"
+
+[node name="Assist_Invuln" type="CheckButton" parent="Assist_Options_cam"]
+offset_left = -23.0
+offset_top = -77.0
+offset_right = 142.0
+offset_bottom = -46.0
+text = "Invulnerability:"
+
+[node name="Assist_Invuln_Text" type="Label" parent="Assist_Options_cam/Assist_Invuln"]
+layout_mode = 0
+offset_left = -121.0
+offset_top = -28.0
+offset_right = 99.0
+offset_bottom = -2.0
+text = "Check this and you can't die:"
+
+[node name="Assist_Invuln_Text2" type="Label" parent="Assist_Options_cam/Assist_Invuln"]
+layout_mode = 0
+offset_left = -122.0
+offset_top = 2.0
+offset_right = -82.0
+offset_bottom = 25.0
+text = "INVULN_STATUS"
+
+[node name="Assist_Dash" type="CheckButton" parent="Assist_Options_cam"]
+offset_left = -23.0
+offset_top = 13.0
+offset_right = 142.0
+offset_bottom = 44.0
+text = "Infinite:"
+
+[node name="Assist_Dash_Explanation" type="Label" parent="Assist_Options_cam/Assist_Dash"]
+layout_mode = 0
+offset_left = -121.0
+offset_top = -28.0
+offset_right = 99.0
+offset_bottom = -2.0
+text = "Dashes:"
+
+[node name="Assist_dash_text" type="Label" parent="Assist_Options_cam/Assist_Dash"]
+layout_mode = 0
+offset_left = -122.0
+offset_top = 2.0
+offset_right = -82.0
+offset_bottom = 25.0
+text = "1"
+
+[node name="BackBtn" type="Button" parent="Assist_Options_cam"]
+offset_left = 117.0
+offset_top = -288.0
+offset_right = 162.0
+offset_bottom = -257.0
+text = "Back"
+
 [connection signal="body_entered" from="KillArea" to="Madeline" method="_on_kill_area_body_entered"]
 [connection signal="timeout" from="TimeToDash" to="Madeline" method="_on_time_to_dash_timeout"]
+[connection signal="pressed" from="Y_MOVABLE/PAUSEBTN" to="." method="_on_pausebtn_pressed"]
+[connection signal="body_entered" from="Strawberry Gen" to="." method="_on_strawberry_gen_body_entered"]
+[connection signal="pressed" from="Pause_Menu_1_Cam/PAUSEBTN2" to="." method="_on_pausebtn_2_pressed"]
+[connection signal="pressed" from="Pause_Menu_1_Cam/ASSist" to="." method="_on_as_sist_pressed"]
+[connection signal="value_changed" from="Assist_Options_cam/Assist_Engine_Speed" to="." method="_on_assist_engine_speed_value_changed"]
+[connection signal="toggled" from="Assist_Options_cam/Assist_Invuln" to="." method="_on_assist_invuln_toggled"]
+[connection signal="toggled" from="Assist_Options_cam/Assist_Dash" to="." method="_on_assist_dash_toggled"]
+[connection signal="pressed" from="Assist_Options_cam/BackBtn" to="." method="_on_back_btn_pressed"]

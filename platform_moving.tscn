@@ -4,27 +4,20 @@
 [ext_resource type="Script" path="res://Path.gd" id="2_lwcei"]
 [ext_resource type="Texture2D" uid="uid://4hnhq3osinw3" path="res://ASSETS/Platforms/Regular-1/0.png" id="2_pgg7c"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_4g1q3"]
-size = Vector2(536, 20)
-
 [sub_resource type="Curve2D" id="Curve2D_drgrq"]
 _data = {
 "points": PackedVector2Array(0, 0, -70, 0, 292.706, -3.8147e-07, 0, 0, 0, 0, -304, -3.8147e-07)
 }
 point_count = 2
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4g1q3"]
+size = Vector2(50, 7)
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_qm72o"]
 size = Vector2(51, 20)
 
 [node name="Platform-Moving" type="Node2D"]
 script = ExtResource("1_x8b1t")
-
-[node name="PointAdder" type="Area2D" parent="."]
-position = Vector2(-1.19209e-07, -8.52651e-14)
-
-[node name="Hitbox" type="CollisionShape2D" parent="PointAdder"]
-position = Vector2(2, 0)
-shape = SubResource("RectangleShape2D_4g1q3")
 
 [node name="Path2D" type="Path2D" parent="."]
 position = Vector2(1.5, 2.38419e-07)
@@ -34,6 +27,15 @@ curve = SubResource("Curve2D_drgrq")
 [node name="PathFollow2D" type="PathFollow2D" parent="Path2D"]
 position = Vector2(292.706, -3.8147e-07)
 rotation = 3.14159
+
+[node name="PointAdder" type="Area2D" parent="Path2D/PathFollow2D"]
+position = Vector2(295.53, -2.5836e-05)
+rotation = 3.14159
+scale = Vector2(1.88235, 1.6)
+
+[node name="Hitbox" type="CollisionShape2D" parent="Path2D/PathFollow2D/PointAdder"]
+position = Vector2(132, -14)
+shape = SubResource("RectangleShape2D_4g1q3")
 
 [node name="Platform" type="Sprite2D" parent="Path2D/PathFollow2D"]
 position = Vector2(46.1177, -1.43051e-05)
@@ -51,4 +53,4 @@ scale = Vector2(1.88235, 1.6)
 shape = SubResource("RectangleShape2D_qm72o")
 one_way_collision = true
 
-[connection signal="body_exited" from="PointAdder" to="." method="_on_point_adder_body_exited" flags=18]
+[connection signal="body_exited" from="Path2D/PathFollow2D/PointAdder" to="." method="_on_point_adder_body_exited" flags=18]
