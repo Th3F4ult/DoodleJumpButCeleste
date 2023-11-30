@@ -21,12 +21,14 @@ func _physics_process(delta):
 		$Madeline_Sprite.flip_h = true
 		$HairBlue.flip_h = true
 		$PlayerHitbox.position.x = $PlayerHitbox.position.x + 5
+		$DashParts.position.x =+ 5
 		aimdirection = "left"
 	elif Input.is_action_just_pressed("ui_right") and aimdirection == "left":
 		$Madeline_Sprite.flip_h = false
 		$HairBlue.flip_h = false
 		$PlayerHitbox.position.x = $PlayerHitbox.position.x - 5
 		aimdirection = "right"
+		$DashParts.position.x = $DashParts.position.x - 5
 		
 	if Global.boost:
 		Global.boost = false
@@ -65,8 +67,9 @@ func _physics_process(delta):
 	move_and_slide()
 	
 	if velocity.y <= 0:
-		$"../KillArea".position.y = position.y + 300
-		$Track.limit_bottom = position.y + 300
+		$"../KillArea".position.y = position.y + 180
+		$Track.limit_bottom = position.y + 150
+		$"../Y_MOVABLE".position.y = position.y - 240
 		Anim.play("NOSTART")
 
 	if velocity.y >= 0:
@@ -84,11 +87,7 @@ func _physics_process(delta):
 
 func _on_kill_area_body_entered(body):
 	if body.is_in_group("player") and not Global.Cheat_Invuln:
-		queue_free()
-		get_tree().change_scene_to_file("res://level.tscn")
-		Global.GenTimes = 10
-		Global.Points = 0
-		Global.StrawBs = 0
+		Global.isDead = true
 	elif body.is_in_group("player") and Global.Cheat_Invuln:
 		velocity.y = -600
 

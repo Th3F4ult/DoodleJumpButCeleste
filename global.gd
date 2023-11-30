@@ -7,3 +7,4 @@ var CanBeKilledbyPlatform = true
 var StrawBs = 0
 var Cheat_Invuln = false
 var Cheat_Dash = false
+var isDead = false

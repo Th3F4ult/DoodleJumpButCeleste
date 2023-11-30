@@ -13,9 +13,18 @@ func _ready():
 	# We will need this for later, assist mode stuff
 
 func _process(delta):
+	if Global.isDead:
+		$Madeline.velocity.y = 0
+		$DeathCam.make_current()
+		DEAD()
+		get_tree().paused = true
+
+
+
+	
 	$Y_MOVABLE/StrawberryDisplay.text = str(Global.StrawBs)
 	$Y_MOVABLE/Points.text = str(Global.Points)
-	$Y_MOVABLE.position.y = $Madeline.position.y - 240
+	
 	if Global.GenTimes > 0:
 		GenPlatform()
 		anotherplat = rng.randi_range(1,1000)
@@ -140,3 +149,25 @@ func _on_assist_dash_toggled(button_pressed):
 	else:
 		Global.Cheat_Dash = false
 		$Assist_Options_cam/Assist_Dash/Assist_dash_text.text = "Default"
+		
+
+func DEAD():
+	$DeathCam/Label_Text_1.text = "You died!"
+	$DeathCam/Label_Text_2.text = "Points:"
+	$DeathCam/Label_Text_POINTS.text = str(Global.Points)
+	$DeathCam/Label_Text_3.text = "Strawberries:"
+	$DeathCam/Label_Text_STRAWBERRIES.text = str(Global.StrawBs)
+
+
+
+func _on_button_retry_pressed():
+	get_tree().change_scene_to_file("res://level.tscn")
+	Global.GenTimes = 10
+	Global.Points = 0
+	Global.StrawBs = 0
+	Global.isDead = false
+	get_tree().paused = true
+
+
+func _on_button_exit_pressed():
+	get_tree().quit()

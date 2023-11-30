@@ -124,6 +124,7 @@ one_shot = true
 position = Vector2(0, 825)
 
 [node name="STRAW_BERRY_UI" type="Sprite2D" parent="Y_MOVABLE"]
+z_index = 1
 position = Vector2(38, 72)
 texture = ExtResource("7_2elfg")
 
@@ -135,6 +136,7 @@ offset_bottom = 49.0
 text = "fasfasfasf"
 
 [node name="StrawberryDisplay" type="Label" parent="Y_MOVABLE"]
+z_index = 1
 offset_left = 70.0
 offset_top = 47.0
 offset_right = 278.0
@@ -269,6 +271,55 @@ offset_right = 162.0
 offset_bottom = -257.0
 text = "Back"
 
+[node name="DeathCam" type="Camera2D" parent="."]
+process_mode = 3
+position = Vector2(923, 824)
+zoom = Vector2(2, 2)
+
+[node name="Label_Text_1" type="Label" parent="DeathCam"]
+offset_left = -135.0
+offset_top = -270.0
+offset_right = -95.0
+offset_bottom = -247.0
+
+[node name="Label_Text_2" type="Label" parent="DeathCam"]
+offset_left = -135.0
+offset_top = -150.0
+offset_right = -95.0
+offset_bottom = -127.0
+
+[node name="Label_Text_POINTS" type="Label" parent="DeathCam"]
+offset_left = 107.0
+offset_top = -150.0
+offset_right = 147.0
+offset_bottom = -127.0
+
+[node name="Label_Text_3" type="Label" parent="DeathCam"]
+offset_left = -135.0
+offset_top = -11.0
+offset_right = -95.0
+offset_bottom = 12.0
+
+[node name="Label_Text_STRAWBERRIES" type="Label" parent="DeathCam"]
+offset_left = 102.0
+offset_top = -11.0
+offset_right = 142.0
+offset_bottom = 12.0
+
+[node name="Button_Retry" type="Button" parent="DeathCam"]
+offset_left = -133.0
+offset_top = 37.0
+offset_right = -54.0
+offset_bottom = 68.0
+text = "Try again"
+
+[node name="Button_Exit" type="Button" parent="DeathCam"]
+offset_left = -133.0
+offset_top = 108.0
+offset_right = -54.0
+offset_bottom = 139.0
+text = "Exit"
+
 [connection signal="body_entered" from="KillArea" to="Madeline" method="_on_kill_area_body_entered"]
 [connection signal="timeout" from="TimeToDash" to="Madeline" method="_on_time_to_dash_timeout"]
 [connection signal="pressed" from="Y_MOVABLE/PAUSEBTN" to="." method="_on_pausebtn_pressed"]
@@ -279,3 +330,5 @@ text = "Back"
 [connection signal="toggled" from="Assist_Options_cam/Assist_Invuln" to="." method="_on_assist_invuln_toggled"]
 [connection signal="toggled" from="Assist_Options_cam/Assist_Dash" to="." method="_on_assist_dash_toggled"]
 [connection signal="pressed" from="Assist_Options_cam/BackBtn" to="." method="_on_back_btn_pressed"]
+[connection signal="pressed" from="DeathCam/Button_Retry" to="." method="_on_button_retry_pressed"]
+[connection signal="pressed" from="DeathCam/Button_Exit" to="." method="_on_button_exit_pressed"]
