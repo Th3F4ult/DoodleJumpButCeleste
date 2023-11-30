@@ -10,7 +10,26 @@ var anotherplat
 var strawberry = preload("res://strawberry.tscn").instantiate()
 
 func _ready():
+	print(Global.Cheat_Dash, Global.Cheat_Invuln, Engine.time_scale)
+	if not Global.Cheat_Dash and not Global.Cheat_Invuln and Engine.time_scale == 1:
+		Global.CheatsUsed = false
+	else:
+		Global.CheatsUsed = true
 	$DeathCam/Assist_Indicator.visible = false
+	if Global.Cheat_Dash:
+		$Assist_Options_cam/Assist_Dash.button_pressed = true
+	if Global.Cheat_Invuln:
+		$Assist_Options_cam/Assist_Invuln.button_pressed = true
+	if Engine.time_scale == 0.5:
+		$Assist_Options_cam/Assist_Engine_Speed.value = 1
+	elif Engine.time_scale == 0.6:
+		$Assist_Options_cam/Assist_Engine_Speed.value = 2
+	elif Engine.time_scale == 0.7:
+		$Assist_Options_cam/Assist_Engine_Speed.value = 3
+	elif Engine.time_scale == 0.8:
+		$Assist_Options_cam/Assist_Engine_Speed.value = 4
+	elif Engine.time_scale == 0.9:
+		$Assist_Options_cam/Assist_Engine_Speed.value = 5
 	# We will need this for later, assist mode stuff
 
 func _process(delta):
@@ -31,13 +50,11 @@ func _process(delta):
 		GenPlatform()
 		anotherplat = rng.randi_range(1,1000)
 		if anotherplat > 0 and anotherplat < 300:
-			print("Generating one platform")
 			other = preload("res://platform_normal.tscn").instantiate()
 			other.position.x = rng.randi_range(000,200)
 			other.position.y = y + 100
 			add_child(other)
 		if anotherplat > 300 and anotherplat < 996:
-			print("Generating two platforms")
 			other = preload("res://platform_normal.tscn").instantiate()
 			other.position.x = rng.randi_range(000,200)
 			other.position.y = y + 75
@@ -47,7 +64,7 @@ func _process(delta):
 			other.position.y = y + 125
 			add_child(other)
 		else:
-			print("Generating a kill platform")
+
 			killplat = preload("res://platform_kill.tscn").instantiate()
 			killplat.position.x = rng.randi_range(000,200)
 			killplat.position.y = y + 100
@@ -96,6 +113,7 @@ func _on_pausebtn_pressed():
 
 
 func _on_assist_engine_speed_value_changed(value):
+	Global.CheatsUsed = true
 	if value == 0:
 		$Assist_Options_cam/Assist_Engine_Speed/Assist_Speed_Text.text = str("OFF")
 		Engine.time_scale = 1
@@ -136,17 +154,18 @@ func _on_back_btn_pressed():
 
 
 func _on_assist_invuln_toggled(button_pressed):
+	Global.CheatsUsed = true
 	if button_pressed:
 		Global.Cheat_Invuln = true
-		print("NOW")
 		$Assist_Options_cam/Assist_Invuln/Assist_Invuln_Text2.text = "Invulnerable"
 	else:
 		Global.Cheat_Invuln = false
 		$Assist_Options_cam/Assist_Invuln/Assist_Invuln_Text2.text = "OFF"
-		print("NOT")
+
 
 
 func _on_assist_dash_toggled(button_pressed):
+	Global.CheatsUsed = true
 	if button_pressed:
 		Global.Cheat_Dash = true
 		$Assist_Options_cam/Assist_Dash/Assist_dash_text.text = "Unlimited"
@@ -156,7 +175,7 @@ func _on_assist_dash_toggled(button_pressed):
 		
 
 func DEAD():
-	if Global.Cheat_Dash or Global.Cheat_Invuln or Engine.time_scale != 1:
+	if Global.CheatsUsed or Global.Cheat_Dash or Global.Cheat_Invuln or Engine.time_scale != 1:
 		$DeathCam/Assist_Indicator.visible = true
 	$DeathCam/Label_Text_1.text = "You died!"
 	$DeathCam/Label_Text_2.text = "Points:"
