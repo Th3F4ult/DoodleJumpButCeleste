@@ -17,13 +17,15 @@ func _ready():
 	Global.CanBeKilledbyPlatform = true
 
 func _physics_process(delta):
-	if Input.is_action_just_pressed("ui_left") and aimdirection == "right":
+
+	
+	if Input.is_action_just_pressed("ui_left") or Input.get_accelerometer().x < -3 and aimdirection == "right":
 		$Madeline_Sprite.flip_h = true
 		$HairBlue.flip_h = true
 		$PlayerHitbox.position.x = $PlayerHitbox.position.x + 5
 		$DashParts.position.x =+ 5
 		aimdirection = "left"
-	elif Input.is_action_just_pressed("ui_right") and aimdirection == "left":
+	elif Input.is_action_just_pressed("ui_right") or Input.get_accelerometer().x > 3 and aimdirection == "left":
 		$Madeline_Sprite.flip_h = false
 		$HairBlue.flip_h = false
 		$PlayerHitbox.position.x = $PlayerHitbox.position.x - 5
@@ -64,12 +66,17 @@ func _physics_process(delta):
 		velocity.x = direction * SPEED
 	else:
 		velocity.x = move_toward(velocity.x, 0, SPEED)
+	if Input.get_accelerometer().x < -3:
+		velocity.x = velocity.x - 200
+	if Input.get_accelerometer().x > 3:
+		velocity.x = velocity.x + 200
 	move_and_slide()
 	
 	if velocity.y <= 0:
 		$"../KillArea".position.y = position.y + 180
 		$Track.limit_bottom = position.y + 150
 		$"../Y_MOVABLE".position.y = position.y - 240
+		$"../PAUSEBTN".position.y = position.y - 240
 		Anim.play("NOSTART")
 
 	if velocity.y >= 0:
