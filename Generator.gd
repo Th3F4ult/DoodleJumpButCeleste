@@ -8,8 +8,9 @@ var booster = preload("res://booster_plat.tscn").instantiate()
 var killplat = preload("res://platform_kill.tscn").instantiate()
 var anotherplat
 var strawberry = preload("res://strawberry.tscn").instantiate()
+
 func _ready():
-	pass
+	$DeathCam/Assist_Indicator.visible = false
 	# We will need this for later, assist mode stuff
 
 func _process(delta):
@@ -17,13 +18,14 @@ func _process(delta):
 		$Madeline.velocity.y = 0
 		$DeathCam.make_current()
 		DEAD()
+		$UI_Elements.visible = false
 		get_tree().paused = true
 
 
 
 	
-	$Y_MOVABLE/StrawberryDisplay.text = str(Global.StrawBs)
-	$Y_MOVABLE/Points.text = str(Global.Points)
+	$UI_Elements/StrawberryDisplay.text = str(Global.StrawBs)
+	$UI_Elements/Points.text = str("Points: ", Global.Points)
 	
 	if Global.GenTimes > 0:
 		GenPlatform()
@@ -86,9 +88,9 @@ func _on_strawberry_gen_body_entered(body):
 
 
 func _on_pausebtn_pressed():
+	$UI_Elements.visible = false
 	$Pause_Menu_1_Cam.make_current()
 	get_tree().paused = not get_tree().paused
-
 	# This SOMEWHAT works. Will do for now.
 
 
@@ -119,6 +121,7 @@ func _on_assist_engine_speed_value_changed(value):
 func _on_pausebtn_2_pressed():
 	get_tree().paused = not get_tree().paused
 	$Madeline/Track.make_current()
+	$UI_Elements.visible = true
 
 
 func _on_as_sist_pressed():
@@ -128,6 +131,7 @@ func _on_as_sist_pressed():
 
 
 func _on_back_btn_pressed():
+	
 	$Pause_Menu_1_Cam.make_current()
 
 
@@ -152,6 +156,8 @@ func _on_assist_dash_toggled(button_pressed):
 		
 
 func DEAD():
+	if Global.Cheat_Dash or Global.Cheat_Invuln or Engine.time_scale != 1:
+		$DeathCam/Assist_Indicator.visible = true
 	$DeathCam/Label_Text_1.text = "You died!"
 	$DeathCam/Label_Text_2.text = "Points:"
 	$DeathCam/Label_Text_POINTS.text = str(Global.Points)
@@ -166,7 +172,7 @@ func _on_button_retry_pressed():
 	Global.Points = 0
 	Global.StrawBs = 0
 	Global.isDead = false
-	get_tree().paused = true
+	get_tree().paused = false
 
 
 func _on_button_exit_pressed():
