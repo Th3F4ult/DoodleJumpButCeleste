@@ -10,7 +10,6 @@ var anotherplat
 var strawberry = preload("res://strawberry.tscn").instantiate()
 
 func _ready():
-	print(Global.Cheat_Dash, Global.Cheat_Invuln, Engine.time_scale)
 	if not Global.Cheat_Dash and not Global.Cheat_Invuln and Engine.time_scale == 1:
 		Global.CheatsUsed = false
 	else:

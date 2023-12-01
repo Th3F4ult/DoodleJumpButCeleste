@@ -16,6 +16,11 @@ func _ready():
 	await get_tree().create_timer(2).timeout
 	Global.CanBeKilledbyPlatform = true
 
+
+func _input(event):
+		if event is InputEventMouseMotion:
+			position.x = get_global_mouse_position().x
+
 func _physics_process(delta):
 
 	
