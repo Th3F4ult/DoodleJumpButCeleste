@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://qdjn2s2lffht"]
+[gd_scene load_steps=24 format=3 uid="uid://qdjn2s2lffht"]
 
 [ext_resource type="Script" path="res://Generator.gd" id="1_heciy"]
 [ext_resource type="Script" path="res://Char.gd" id="2_insj0"]
@@ -8,6 +8,9 @@
 [ext_resource type="Texture2D" uid="uid://cli42e5p4bdt5" path="res://ASSETS/Madeline/HAIR_SPRITE/HAIR_BLUE.png" id="6_b6ekg"]
 [ext_resource type="Texture2D" uid="uid://dbgi34iphaxt2" path="res://ASSETS/Strawb/UI/0.png" id="7_2elfg"]
 [ext_resource type="Texture2D" uid="uid://dafiij0qct1o1" path="res://ASSETS/Strawb/Idle/4.png" id="7_yrv7g"]
+[ext_resource type="Texture2D" uid="uid://ccqd6qlj1vlce" path="res://ASSETS/UI/Right.png" id="9_2l3bo"]
+[ext_resource type="Texture2D" uid="uid://e7lgpuyb5sle" path="res://ASSETS/UI/Left.png" id="10_qeesr"]
+[ext_resource type="Texture2D" uid="uid://c6qjmfjurgjb8" path="res://ASSETS/UI/Dash.png" id="11_rpjqs"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_t1mqt"]
 size = Vector2(213, 29)
@@ -65,6 +68,9 @@ font_color = Color(0, 0, 0, 1)
 [sub_resource type="LabelSettings" id="LabelSettings_dsuys"]
 font_size = 48
 font_color = Color(0, 0, 0, 1)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_gdlji"]
+size = Vector2(64, 64)
 
 [node name="Level" type="Node2D"]
 script = ExtResource("1_heciy")
@@ -340,6 +346,27 @@ offset_right = 90.0
 offset_bottom = 39.0
 text = "fasfasfasf"
 label_settings = SubResource("LabelSettings_dsuys")
+
+[node name="Touch_Right" type="TouchScreenButton" parent="UI_Elements"]
+position = Vector2(456, 960)
+scale = Vector2(3, 3)
+texture_normal = ExtResource("9_2l3bo")
+shape = SubResource("RectangleShape2D_gdlji")
+action = "ui_right"
+
+[node name="Touch_Left" type="TouchScreenButton" parent="UI_Elements"]
+position = Vector2(1, 964)
+scale = Vector2(3, 3)
+texture_normal = ExtResource("10_qeesr")
+shape = SubResource("RectangleShape2D_gdlji")
+action = "ui_left"
+
+[node name="Touch_Dash" type="TouchScreenButton" parent="UI_Elements"]
+position = Vector2(234, 964)
+scale = Vector2(3, 3)
+texture_normal = ExtResource("11_rpjqs")
+shape = SubResource("RectangleShape2D_gdlji")
+action = "DASH"
 
 [connection signal="body_entered" from="KillArea" to="Madeline" method="_on_kill_area_body_entered"]
 [connection signal="timeout" from="TimeToDash" to="Madeline" method="_on_time_to_dash_timeout"]

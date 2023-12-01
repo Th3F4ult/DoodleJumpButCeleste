@@ -15,22 +15,17 @@ func _ready():
 	Global.CanBeKilledbyPlatform = false
 	await get_tree().create_timer(2).timeout
 	Global.CanBeKilledbyPlatform = true
-
-
-func _input(event):
-		if event is InputEventMouseMotion:
-			position.x = get_global_mouse_position().x
-
-func _physics_process(delta):
-
 	
-	if Input.is_action_just_pressed("ui_left") or Input.get_accelerometer().x < -3 and aimdirection == "right":
+
+func _physics_process(delta): 
+	
+	if Input.is_action_just_pressed("ui_left") and aimdirection == "right":
 		$Madeline_Sprite.flip_h = true
 		$HairBlue.flip_h = true
 		$PlayerHitbox.position.x = $PlayerHitbox.position.x + 5
 		$DashParts.position.x =+ 5
 		aimdirection = "left"
-	elif Input.is_action_just_pressed("ui_right") or Input.get_accelerometer().x > 3 and aimdirection == "left":
+	elif Input.is_action_just_pressed("ui_right") and aimdirection == "left":
 		$Madeline_Sprite.flip_h = false
 		$HairBlue.flip_h = false
 		$PlayerHitbox.position.x = $PlayerHitbox.position.x - 5
@@ -55,7 +50,7 @@ func _physics_process(delta):
 		$DashParts.emitting = true
 		$HairBlue.visible = true
 		Global.CanBeKilledbyPlatform = false
-		await get_tree().create_timer(0.5).timeout
+		await get_tree().create_timer(0.8).timeout
 		Global.CanBeKilledbyPlatform = true
 	elif Input.is_action_just_pressed("DASH") and Global.Cheat_Dash:
 		velocity.y = JUMP_VELOCITY * 2
@@ -108,3 +103,7 @@ func _on_kill_area_body_entered(body):
 func _on_time_to_dash_timeout():
 		CanDash = true
 		$HairBlue.visible = false
+
+
+func _on_touch_screen_button_pressed():
+	velocity.x = +200
