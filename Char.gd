@@ -66,10 +66,6 @@ func _physics_process(delta):
 		velocity.x = direction * SPEED
 	else:
 		velocity.x = move_toward(velocity.x, 0, SPEED)
-	if Input.get_accelerometer().x < -3:
-		velocity.x = velocity.x - 200
-	if Input.get_accelerometer().x > 3:
-		velocity.x = velocity.x + 200
 	move_and_slide()
 	
 	if velocity.y <= 0:
