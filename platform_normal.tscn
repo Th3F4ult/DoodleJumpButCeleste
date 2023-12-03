@@ -7,7 +7,7 @@
 size = Vector2(51, 20)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4g1q3"]
-size = Vector2(51, 5)
+size = Vector2(51, 12)
 
 [node name="Platform-Normal" type="StaticBody2D"]
 script = ExtResource("1_vgyih")
@@ -25,7 +25,7 @@ one_way_collision = true
 [node name="PointAdder" type="Area2D" parent="."]
 
 [node name="Hitbox" type="CollisionShape2D" parent="PointAdder"]
-position = Vector2(1.5, -12.5)
+position = Vector2(1.5, -16)
 shape = SubResource("RectangleShape2D_4g1q3")
 
 [connection signal="body_exited" from="PointAdder" to="." method="_on_point_adder_body_exited"]

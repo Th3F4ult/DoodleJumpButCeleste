@@ -19,6 +19,7 @@ func _ready():
 		$Assist_Options_cam/Assist_Dash.button_pressed = true
 	if Global.Cheat_Invuln:
 		$Assist_Options_cam/Assist_Invuln.button_pressed = true
+		
 	if Engine.time_scale == 0.5:
 		$Assist_Options_cam/Assist_Engine_Speed.value = 1
 	elif Engine.time_scale == 0.6:
@@ -29,6 +30,7 @@ func _ready():
 		$Assist_Options_cam/Assist_Engine_Speed.value = 4
 	elif Engine.time_scale == 0.9:
 		$Assist_Options_cam/Assist_Engine_Speed.value = 5
+	
 	# We will need this for later, assist mode stuff
 
 func _process(delta):
@@ -38,13 +40,9 @@ func _process(delta):
 		DEAD()
 		$UI_Elements.visible = false
 		get_tree().paused = true
-
-
-
-	
 	$UI_Elements/StrawberryDisplay.text = str(Global.StrawBs)
 	$UI_Elements/Points.text = str("Points: ", Global.Points)
-	
+
 	if Global.GenTimes > 0:
 		GenPlatform()
 		anotherplat = rng.randi_range(1,1000)
@@ -181,6 +179,7 @@ func DEAD():
 	$DeathCam/Label_Text_POINTS.text = str(Global.Points)
 	$DeathCam/Label_Text_3.text = "Strawberries:"
 	$DeathCam/Label_Text_STRAWBERRIES.text = str(Global.StrawBs)
+	Global.CanGetPoint = false
 
 
 

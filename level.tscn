@@ -233,7 +233,7 @@ offset_left = -122.0
 offset_top = 2.0
 offset_right = -82.0
 offset_bottom = 25.0
-text = "INVULN_STATUS"
+text = "OFF"
 
 [node name="Assist_Dash" type="CheckButton" parent="Assist_Options_cam"]
 offset_left = -23.0

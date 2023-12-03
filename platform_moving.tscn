@@ -11,7 +11,7 @@ _data = {
 point_count = 2
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4g1q3"]
-size = Vector2(50, 7)
+size = Vector2(50, 14.4996)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_qm72o"]
 size = Vector2(51, 20)
@@ -34,8 +34,10 @@ rotation = 3.14159
 scale = Vector2(1.88235, 1.6)
 
 [node name="Hitbox" type="CollisionShape2D" parent="Path2D/PathFollow2D/PointAdder"]
-position = Vector2(132, -14)
+position = Vector2(132, -17.7498)
 shape = SubResource("RectangleShape2D_4g1q3")
+one_way_collision_margin = 2.3
+debug_color = Color(0, 0.639216, 0.380392, 0.419608)
 
 [node name="Platform" type="Sprite2D" parent="Path2D/PathFollow2D"]
 position = Vector2(46.1177, -1.43051e-05)

@@ -39,6 +39,9 @@ func _physics_process(delta):
 		velocity.y += gravity * delta
 
 	if is_on_floor():
+		if Global.CanGetPoint:
+			Global.CanGetPoint = false
+			Global.Points = Global.Points + 1
 		velocity.y = JUMP_VELOCITY * 1.4
 		Global.GenTimes = Global.GenTimes + 1
 		

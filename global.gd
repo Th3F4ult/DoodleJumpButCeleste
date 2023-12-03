@@ -9,3 +9,4 @@ var Cheat_Invuln = false
 var Cheat_Dash = false
 var isDead = false
 var CheatsUsed = false
+var CanGetPoint = false
