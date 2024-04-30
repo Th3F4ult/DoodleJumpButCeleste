@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://qdjn2s2lffht"]
+[gd_scene load_steps=27 format=3 uid="uid://qdjn2s2lffht"]
 
 [ext_resource type="Script" path="res://Generator.gd" id="1_heciy"]
 [ext_resource type="Script" path="res://Char.gd" id="2_insj0"]
@@ -8,9 +8,10 @@
 [ext_resource type="Texture2D" uid="uid://cli42e5p4bdt5" path="res://ASSETS/Madeline/HAIR_SPRITE/HAIR_BLUE.png" id="6_b6ekg"]
 [ext_resource type="Texture2D" uid="uid://dbgi34iphaxt2" path="res://ASSETS/Strawb/UI/0.png" id="7_2elfg"]
 [ext_resource type="Texture2D" uid="uid://dafiij0qct1o1" path="res://ASSETS/Strawb/Idle/4.png" id="7_yrv7g"]
-[ext_resource type="Texture2D" uid="uid://ccqd6qlj1vlce" path="res://ASSETS/UI/Right.png" id="9_2l3bo"]
-[ext_resource type="Texture2D" uid="uid://e7lgpuyb5sle" path="res://ASSETS/UI/Left.png" id="10_qeesr"]
-[ext_resource type="Texture2D" uid="uid://c6qjmfjurgjb8" path="res://ASSETS/UI/Dash.png" id="11_rpjqs"]
+[ext_resource type="Texture2D" uid="uid://ig8qft3jv7or" path="res://ASSETS/RightBtn.png" id="9_l4ypu"]
+[ext_resource type="Texture2D" uid="uid://c3ago8qag2ir4" path="res://ASSETS/LeftBtn.png" id="10_8guwk"]
+[ext_resource type="Texture2D" uid="uid://bj7eri775fk2r" path="res://ASSETS/DashBtn.png" id="11_ry7qm"]
+[ext_resource type="Texture2D" uid="uid://c76x3ci6w8qjo" path="res://ASSETS/DASH_TP_CONTROLS.png" id="12_8t17p"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_t1mqt"]
 size = Vector2(213, 29)
@@ -61,6 +62,19 @@ size = Vector2(20, 1812)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_fmb7u"]
 size = Vector2(255, 20)
 
+[sub_resource type="GDScript" id="GDScript_sxth2"]
+script/source = "extends Camera2D
+
+# This script just exists because I needed an always-processing one.
+func _process(delta):
+	match Global.ControlMode:
+		\"touch\": $Button.disabled = true; $Button2.disabled = false; $Button3.disabled = false; $\"../UI_Elements/Touch_Controls\".visible = true; $\"../UI_Elements/Touch_Dash2\".visible = false
+		\"acc\": $Button2.disabled = true; $Button.disabled = false; $Button3.disabled = false; $\"../UI_Elements/Touch_Controls\".visible = false; $\"../UI_Elements/Touch_Dash2\".visible = true
+		\"TP\": $Button3.disabled = true; $Button2.disabled = false; $Button.disabled = false; $\"../UI_Elements/Touch_Controls\".visible = false; $\"../UI_Elements/Touch_Dash2\".visible = true
+		
+# Will try to put these somewhere else, the code is very bad, I've learned a lot since.
+"
+
 [sub_resource type="LabelSettings" id="LabelSettings_eoosq"]
 font_size = 48
 font_color = Color(0, 0, 0, 1)
@@ -68,6 +82,9 @@ font_color = Color(0, 0, 0, 1)
 [sub_resource type="LabelSettings" id="LabelSettings_dsuys"]
 font_size = 48
 font_color = Color(0, 0, 0, 1)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_6it0y"]
+size = Vector2(200, 100)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_gdlji"]
 size = Vector2(64, 64)
@@ -145,17 +162,6 @@ shape = SubResource("RectangleShape2D_8d8lf")
 position = Vector2(226, 898)
 shape = SubResource("RectangleShape2D_8d8lf")
 
-[node name="PAUSEBTN" type="Button" parent="."]
-process_mode = 3
-z_index = -3
-y_sort_enabled = true
-offset_left = 160.0
-offset_top = 816.0
-offset_right = 274.0
-offset_bottom = 895.0
-scale = Vector2(0.5, 0.5)
-text = "PAUSE"
-
 [node name="Strawberry Gen" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Strawberry Gen"]
@@ -163,8 +169,10 @@ position = Vector2(109.5, 984)
 shape = SubResource("RectangleShape2D_fmb7u")
 
 [node name="Pause_Menu_1_Cam" type="Camera2D" parent="."]
+process_mode = 3
 position = Vector2(-349, 1058)
 zoom = Vector2(3, 3)
+script = SubResource("GDScript_sxth2")
 
 [node name="PAUSEBTN2" type="Button" parent="Pause_Menu_1_Cam"]
 process_mode = 3
@@ -181,6 +189,66 @@ offset_top = -97.0
 offset_right = -77.0
 offset_bottom = -89.0
 text = "Assist Mode Options"
+
+[node name="Button" type="Button" parent="Pause_Menu_1_Cam"]
+process_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -62.0
+offset_top = -38.0
+offset_right = 63.0
+offset_bottom = -7.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Touch Controls"
+
+[node name="Button2" type="Button" parent="Pause_Menu_1_Cam"]
+process_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -95.0
+offset_top = 6.0
+offset_right = 96.0
+offset_bottom = 37.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Accelerometer Controls"
+
+[node name="Button3" type="Button" parent="Pause_Menu_1_Cam"]
+process_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -71.0
+offset_top = 51.0
+offset_right = 72.0
+offset_bottom = 82.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Teleport Controls"
+
+[node name="Button4" type="Button" parent="Pause_Menu_1_Cam"]
+process_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -71.0
+offset_top = 127.0
+offset_right = 72.0
+offset_bottom = 158.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "DELETE SAVES"
 
 [node name="Assist_Options_cam" type="Camera2D" parent="."]
 process_mode = 3
@@ -347,36 +415,58 @@ offset_bottom = 39.0
 text = "fasfasfasf"
 label_settings = SubResource("LabelSettings_dsuys")
 
-[node name="Touch_Right" type="TouchScreenButton" parent="UI_Elements"]
-position = Vector2(456, 960)
+[node name="PAUSEBTN" type="Button" parent="UI_Elements"]
+process_mode = 3
+z_index = -3
+y_sort_enabled = true
+offset_left = 448.0
+offset_right = 648.0
+offset_bottom = 150.0
+text = "PAUSE"
+
+[node name="Touch_Dash2" type="TouchScreenButton" parent="UI_Elements"]
+position = Vector2(-1, 1037)
+scale = Vector2(3.24, 1.19)
+texture_normal = ExtResource("12_8t17p")
+shape = SubResource("RectangleShape2D_6it0y")
+action = "DASH"
+
+[node name="Touch_Controls" type="Node2D" parent="UI_Elements"]
+
+[node name="Touch_Right" type="TouchScreenButton" parent="UI_Elements/Touch_Controls"]
+position = Vector2(441, 960)
 scale = Vector2(3, 3)
-texture_normal = ExtResource("9_2l3bo")
+texture_normal = ExtResource("9_l4ypu")
 shape = SubResource("RectangleShape2D_gdlji")
 action = "ui_right"
 
-[node name="Touch_Left" type="TouchScreenButton" parent="UI_Elements"]
-position = Vector2(1, 964)
+[node name="Touch_Left" type="TouchScreenButton" parent="UI_Elements/Touch_Controls"]
+position = Vector2(8, 960)
 scale = Vector2(3, 3)
-texture_normal = ExtResource("10_qeesr")
+texture_normal = ExtResource("10_8guwk")
 shape = SubResource("RectangleShape2D_gdlji")
 action = "ui_left"
 
-[node name="Touch_Dash" type="TouchScreenButton" parent="UI_Elements"]
-position = Vector2(234, 964)
+[node name="Touch_Dash" type="TouchScreenButton" parent="UI_Elements/Touch_Controls"]
+position = Vector2(228, 960)
 scale = Vector2(3, 3)
-texture_normal = ExtResource("11_rpjqs")
+texture_normal = ExtResource("11_ry7qm")
 shape = SubResource("RectangleShape2D_gdlji")
 action = "DASH"
 
 [connection signal="body_entered" from="KillArea" to="Madeline" method="_on_kill_area_body_entered"]
 [connection signal="timeout" from="TimeToDash" to="Madeline" method="_on_time_to_dash_timeout"]
-[connection signal="pressed" from="PAUSEBTN" to="." method="_on_pausebtn_pressed"]
 [connection signal="body_entered" from="Strawberry Gen" to="." method="_on_strawberry_gen_body_entered"]
 [connection signal="pressed" from="Pause_Menu_1_Cam/PAUSEBTN2" to="." method="_on_pausebtn_2_pressed"]
 [connection signal="pressed" from="Pause_Menu_1_Cam/ASSist" to="." method="_on_as_sist_pressed"]
+[connection signal="pressed" from="Pause_Menu_1_Cam/Button" to="." method="Touch"]
+[connection signal="pressed" from="Pause_Menu_1_Cam/Button2" to="." method="Acc"]
+[connection signal="pressed" from="Pause_Menu_1_Cam/Button3" to="." method="Teleport"]
+[connection signal="pressed" from="Pause_Menu_1_Cam/Button4" to="Madeline" method="DELETE_SAVES"]
 [connection signal="value_changed" from="Assist_Options_cam/Assist_Engine_Speed" to="." method="_on_assist_engine_speed_value_changed"]
 [connection signal="toggled" from="Assist_Options_cam/Assist_Invuln" to="." method="_on_assist_invuln_toggled"]
 [connection signal="toggled" from="Assist_Options_cam/Assist_Dash" to="." method="_on_assist_dash_toggled"]
 [connection signal="pressed" from="Assist_Options_cam/BackBtn" to="." method="_on_back_btn_pressed"]
 [connection signal="pressed" from="DeathCam/Button_Retry" to="." method="_on_button_retry_pressed"]
 [connection signal="pressed" from="DeathCam/Button_Exit" to="." method="_on_button_exit_pressed"]
+[connection signal="pressed" from="UI_Elements/PAUSEBTN" to="." method="_on_pausebtn_pressed"]
