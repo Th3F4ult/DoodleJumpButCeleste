@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://cnrh45gty48t4"]
+
+[ext_resource type="Texture2D" uid="uid://dbeuqcn51l6i7" path="res://MADELINE_DEATH_INDICATOR.png" id="1_rgum8"]
+
+[node name="TextureRect" type="TextureRect"]
+z_index = -2
+offset_right = 40.0
+offset_bottom = 40.0
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("1_rgum8")
