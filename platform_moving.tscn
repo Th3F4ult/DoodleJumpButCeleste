@@ -55,4 +55,4 @@ scale = Vector2(1.88235, 1.6)
 shape = SubResource("RectangleShape2D_qm72o")
 one_way_collision = true
 
-[connection signal="body_exited" from="Path2D/PathFollow2D/PointAdder" to="." method="_on_point_adder_body_exited" flags=18]
+[connection signal="body_exited" from="Path2D/PathFollow2D/PointAdder" to="." method="_on_point_adder_body_exited"]

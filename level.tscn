@@ -7,6 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://btwoohibbl6bg" path="res://ASSETS/Madeline/Falling_CanDash/1.png" id="5_gk2jx"]
 [ext_resource type="Texture2D" uid="uid://cli42e5p4bdt5" path="res://ASSETS/Madeline/HAIR_SPRITE/HAIR_BLUE.png" id="6_b6ekg"]
 [ext_resource type="Texture2D" uid="uid://dbgi34iphaxt2" path="res://ASSETS/Strawb/UI/0.png" id="7_2elfg"]
+[ext_resource type="Texture2D" uid="uid://cvxb2y0hpdlv3" path="res://ASSETS/Madeline/HAIR_SPRITE/HAIR_PINK.png" id="7_sw5hm"]
 [ext_resource type="Texture2D" uid="uid://dafiij0qct1o1" path="res://ASSETS/Strawb/Idle/4.png" id="7_yrv7g"]
 [ext_resource type="Texture2D" uid="uid://ig8qft3jv7or" path="res://ASSETS/RightBtn.png" id="9_l4ypu"]
 [ext_resource type="Texture2D" uid="uid://c3ago8qag2ir4" path="res://ASSETS/LeftBtn.png" id="10_8guwk"]
@@ -62,19 +63,6 @@ size = Vector2(20, 1812)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_fmb7u"]
 size = Vector2(255, 20)
 
-[sub_resource type="GDScript" id="GDScript_sxth2"]
-script/source = "extends Camera2D
-
-# This script just exists because I needed an always-processing one.
-func _process(delta):
-	match Global.ControlMode:
-		\"touch\": $Button.disabled = true; $Button2.disabled = false; $Button3.disabled = false; $\"../UI_Elements/Touch_Controls\".visible = true; $\"../UI_Elements/Touch_Dash2\".visible = false
-		\"acc\": $Button2.disabled = true; $Button.disabled = false; $Button3.disabled = false; $\"../UI_Elements/Touch_Controls\".visible = false; $\"../UI_Elements/Touch_Dash2\".visible = true
-		\"TP\": $Button3.disabled = true; $Button2.disabled = false; $Button.disabled = false; $\"../UI_Elements/Touch_Controls\".visible = false; $\"../UI_Elements/Touch_Dash2\".visible = true
-		
-# Will try to put these somewhere else, the code is very bad, I've learned a lot since.
-"
-
 [sub_resource type="LabelSettings" id="LabelSettings_eoosq"]
 font_size = 48
 font_color = Color(0, 0, 0, 1)
@@ -99,6 +87,7 @@ position = Vector2(111, 1185)
 shape = SubResource("RectangleShape2D_t1mqt")
 
 [node name="DELIM" type="StaticBody2D" parent="."]
+visible = false
 
 [node name="Ground" type="CollisionShape2D" parent="DELIM"]
 position = Vector2(108.5, 1162)
@@ -118,7 +107,7 @@ process_mode = 3
 position = Vector2(3, -40)
 zoom = Vector2(3, 3)
 limit_left = 0
-limit_right = 217
+limit_right = 216
 limit_bottom = 1200
 editor_draw_limits = true
 
@@ -141,12 +130,14 @@ sprite_frames = SubResource("SpriteFrames_3fc2j")
 animation = &"Falling_CanDash"
 
 [node name="HairBlue" type="Sprite2D" parent="Madeline"]
+visible = false
 position = Vector2(2, -2)
 texture = ExtResource("6_b6ekg")
 
-[node name="TimeToDash" type="Timer" parent="."]
-wait_time = 3.0
-one_shot = true
+[node name="HairPink" type="Sprite2D" parent="Madeline"]
+visible = false
+position = Vector2(2, -2)
+texture = ExtResource("7_sw5hm")
 
 [node name="Y_MOVABLE" type="Node2D" parent="."]
 position = Vector2(0, 825)
@@ -167,171 +158,6 @@ shape = SubResource("RectangleShape2D_8d8lf")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Strawberry Gen"]
 position = Vector2(109.5, 984)
 shape = SubResource("RectangleShape2D_fmb7u")
-
-[node name="Pause_Menu_1_Cam" type="Camera2D" parent="."]
-process_mode = 3
-position = Vector2(-349, 1058)
-zoom = Vector2(3, 3)
-script = SubResource("GDScript_sxth2")
-
-[node name="PAUSEBTN2" type="Button" parent="Pause_Menu_1_Cam"]
-process_mode = 3
-offset_left = 26.0
-offset_top = -192.0
-offset_right = 108.0
-offset_bottom = -146.0
-text = "Resume"
-
-[node name="ASSist" type="Button" parent="Pause_Menu_1_Cam"]
-process_mode = 3
-offset_left = -85.0
-offset_top = -97.0
-offset_right = -77.0
-offset_bottom = -89.0
-text = "Assist Mode Options"
-
-[node name="Button" type="Button" parent="Pause_Menu_1_Cam"]
-process_mode = 3
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -62.0
-offset_top = -38.0
-offset_right = 63.0
-offset_bottom = -7.0
-grow_horizontal = 2
-grow_vertical = 2
-text = "Touch Controls"
-
-[node name="Button2" type="Button" parent="Pause_Menu_1_Cam"]
-process_mode = 3
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -95.0
-offset_top = 6.0
-offset_right = 96.0
-offset_bottom = 37.0
-grow_horizontal = 2
-grow_vertical = 2
-text = "Accelerometer Controls"
-
-[node name="Button3" type="Button" parent="Pause_Menu_1_Cam"]
-process_mode = 3
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -71.0
-offset_top = 51.0
-offset_right = 72.0
-offset_bottom = 82.0
-grow_horizontal = 2
-grow_vertical = 2
-text = "Teleport Controls"
-
-[node name="Button4" type="Button" parent="Pause_Menu_1_Cam"]
-process_mode = 3
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -71.0
-offset_top = 127.0
-offset_right = 72.0
-offset_bottom = 158.0
-grow_horizontal = 2
-grow_vertical = 2
-text = "DELETE SAVES"
-
-[node name="Assist_Options_cam" type="Camera2D" parent="."]
-process_mode = 3
-position = Vector2(-632, 1039)
-zoom = Vector2(2, 2)
-
-[node name="Assist_Engine_Speed" type="HSlider" parent="Assist_Options_cam"]
-process_mode = 3
-offset_left = 2.0
-offset_top = -144.0
-offset_right = 144.0
-offset_bottom = -128.0
-max_value = 5.0
-tick_count = 5
-
-[node name="Assist_Speed_Text" type="Label" parent="Assist_Options_cam/Assist_Engine_Speed"]
-layout_mode = 0
-offset_left = -148.0
-offset_top = -4.0
-offset_right = -108.0
-offset_bottom = 19.0
-text = "GAMESPEED"
-
-[node name="Assist_Engine_Explanation" type="Label" parent="Assist_Options_cam/Assist_Engine_Speed"]
-layout_mode = 0
-offset_left = -145.0
-offset_top = -46.0
-offset_right = -43.0
-offset_bottom = -20.0
-text = "Game Speed:"
-
-[node name="Assist_Invuln" type="CheckButton" parent="Assist_Options_cam"]
-offset_left = -23.0
-offset_top = -77.0
-offset_right = 142.0
-offset_bottom = -46.0
-text = "Invulnerability:"
-
-[node name="Assist_Invuln_Text" type="Label" parent="Assist_Options_cam/Assist_Invuln"]
-layout_mode = 0
-offset_left = -121.0
-offset_top = -28.0
-offset_right = 99.0
-offset_bottom = -2.0
-text = "Check this and you can't die:"
-
-[node name="Assist_Invuln_Text2" type="Label" parent="Assist_Options_cam/Assist_Invuln"]
-layout_mode = 0
-offset_left = -122.0
-offset_top = 2.0
-offset_right = -82.0
-offset_bottom = 25.0
-text = "OFF"
-
-[node name="Assist_Dash" type="CheckButton" parent="Assist_Options_cam"]
-offset_left = -23.0
-offset_top = 13.0
-offset_right = 142.0
-offset_bottom = 44.0
-text = "Infinite:"
-
-[node name="Assist_Dash_Explanation" type="Label" parent="Assist_Options_cam/Assist_Dash"]
-layout_mode = 0
-offset_left = -121.0
-offset_top = -28.0
-offset_right = 99.0
-offset_bottom = -2.0
-text = "Dashes:"
-
-[node name="Assist_dash_text" type="Label" parent="Assist_Options_cam/Assist_Dash"]
-layout_mode = 0
-offset_left = -122.0
-offset_top = 2.0
-offset_right = -82.0
-offset_bottom = 25.0
-text = "1"
-
-[node name="BackBtn" type="Button" parent="Assist_Options_cam"]
-offset_left = 117.0
-offset_top = -288.0
-offset_right = 162.0
-offset_bottom = -257.0
-text = "Back"
 
 [node name="DeathCam" type="Camera2D" parent="."]
 process_mode = 3
@@ -454,19 +280,182 @@ texture_normal = ExtResource("11_ry7qm")
 shape = SubResource("RectangleShape2D_gdlji")
 action = "DASH"
 
+[node name="Pause_Men" type="Control" parent="UI_Elements"]
+visible = false
+layout_mode = 3
+anchors_preset = 0
+offset_left = 537.0
+offset_top = 192.0
+offset_right = 577.0
+offset_bottom = 232.0
+
+[node name="ColorRect" type="ColorRect" parent="UI_Elements/Pause_Men"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -537.0
+offset_top = -192.0
+offset_right = 71.0
+offset_bottom = 920.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.670588, 0.6, 0.847059, 1)
+
+[node name="Assist_Invis" type="Control" parent="UI_Elements/Pause_Men"]
+visible = false
+layout_mode = 3
+anchors_preset = 0
+offset_left = -487.0
+offset_top = 164.0
+offset_right = -447.0
+offset_bottom = 204.0
+
+[node name="Assist_Engine_Speed" type="HSlider" parent="UI_Elements/Pause_Men/Assist_Invis"]
+process_mode = 3
+offset_left = 115.0
+offset_top = 64.0
+offset_right = 257.0
+offset_bottom = 80.0
+max_value = 5.0
+tick_count = 5
+
+[node name="Assist_Speed_Text" type="Label" parent="UI_Elements/Pause_Men/Assist_Invis/Assist_Engine_Speed"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = -148.0
+offset_top = -4.0
+offset_right = -108.0
+offset_bottom = 19.0
+text = "GAMESPEED"
+
+[node name="Assist_Engine_Explanation" type="Label" parent="UI_Elements/Pause_Men/Assist_Invis/Assist_Engine_Speed"]
+layout_mode = 0
+offset_left = -145.0
+offset_top = -46.0
+offset_right = -43.0
+offset_bottom = -20.0
+text = "Game Speed:"
+
+[node name="Assist_Invuln" type="CheckButton" parent="UI_Elements/Pause_Men/Assist_Invis"]
+unique_name_in_owner = true
+offset_left = 90.0
+offset_top = 131.0
+offset_right = 255.0
+offset_bottom = 162.0
+text = "Invulnerability:"
+
+[node name="Assist_Invuln_Text" type="Label" parent="UI_Elements/Pause_Men/Assist_Invis/Assist_Invuln"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = -121.0
+offset_top = -28.0
+offset_right = 99.0
+offset_bottom = -2.0
+text = "Check this and you can't die:"
+
+[node name="Assist_Invuln_Text2" type="Label" parent="UI_Elements/Pause_Men/Assist_Invis/Assist_Invuln"]
+layout_mode = 0
+offset_left = -122.0
+offset_top = 2.0
+offset_right = -82.0
+offset_bottom = 25.0
+text = "OFF"
+
+[node name="Assist_Dash" type="CheckButton" parent="UI_Elements/Pause_Men/Assist_Invis"]
+offset_left = 90.0
+offset_top = 221.0
+offset_right = 255.0
+offset_bottom = 252.0
+text = "Infinite:"
+
+[node name="Assist_Dash_Explanation" type="Label" parent="UI_Elements/Pause_Men/Assist_Invis/Assist_Dash"]
+layout_mode = 0
+offset_left = -121.0
+offset_top = -28.0
+offset_right = 99.0
+offset_bottom = -2.0
+text = "Dashes:"
+
+[node name="Assist_dash_text" type="Label" parent="UI_Elements/Pause_Men/Assist_Invis/Assist_Dash"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = -122.0
+offset_top = 2.0
+offset_right = -82.0
+offset_bottom = 25.0
+text = "1"
+
+[node name="Unpause" type="Button" parent="UI_Elements/Pause_Men"]
+process_mode = 3
+offset_left = -88.0
+offset_top = -192.0
+offset_right = 111.0
+offset_bottom = -42.0
+text = "RESUME"
+
+[node name="ASSist" type="Button" parent="UI_Elements/Pause_Men"]
+process_mode = 3
+layout_mode = 0
+offset_left = -500.0
+offset_top = 100.0
+offset_right = -334.0
+offset_bottom = 131.0
+text = "Assist Mode Options"
+
+[node name="Button" type="Button" parent="UI_Elements/Pause_Men"]
+process_mode = 3
+layout_mode = 0
+offset_left = -200.0
+offset_top = 30.0
+offset_right = -75.0
+offset_bottom = 61.0
+text = "Touch Controls"
+
+[node name="Button2" type="Button" parent="UI_Elements/Pause_Men"]
+process_mode = 3
+layout_mode = 0
+offset_left = -200.0
+offset_top = 90.0
+offset_bottom = 121.0
+text = "Accelerometer Controls"
+
+[node name="Button3" type="Button" parent="UI_Elements/Pause_Men"]
+process_mode = 3
+layout_mode = 0
+offset_left = -200.0
+offset_top = 150.0
+offset_right = -57.0
+offset_bottom = 181.0
+text = "Teleport Controls"
+
+[node name="Button4" type="Button" parent="UI_Elements/Pause_Men"]
+process_mode = 3
+layout_mode = 0
+offset_left = -50.0
+offset_top = 900.0
+offset_right = 93.0
+offset_bottom = 931.0
+text = "DELETE SAVES"
+
+[node name="DeathScreen" type="Control" parent="UI_Elements"]
+visible = false
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
 [connection signal="body_entered" from="KillArea" to="Madeline" method="_on_kill_area_body_entered"]
-[connection signal="timeout" from="TimeToDash" to="Madeline" method="_on_time_to_dash_timeout"]
 [connection signal="body_entered" from="Strawberry Gen" to="." method="_on_strawberry_gen_body_entered"]
-[connection signal="pressed" from="Pause_Menu_1_Cam/PAUSEBTN2" to="." method="_on_pausebtn_2_pressed"]
-[connection signal="pressed" from="Pause_Menu_1_Cam/ASSist" to="." method="_on_as_sist_pressed"]
-[connection signal="pressed" from="Pause_Menu_1_Cam/Button" to="." method="Touch"]
-[connection signal="pressed" from="Pause_Menu_1_Cam/Button2" to="." method="Acc"]
-[connection signal="pressed" from="Pause_Menu_1_Cam/Button3" to="." method="Teleport"]
-[connection signal="pressed" from="Pause_Menu_1_Cam/Button4" to="Madeline" method="DELETE_SAVES"]
-[connection signal="value_changed" from="Assist_Options_cam/Assist_Engine_Speed" to="." method="_on_assist_engine_speed_value_changed"]
-[connection signal="toggled" from="Assist_Options_cam/Assist_Invuln" to="." method="_on_assist_invuln_toggled"]
-[connection signal="toggled" from="Assist_Options_cam/Assist_Dash" to="." method="_on_assist_dash_toggled"]
-[connection signal="pressed" from="Assist_Options_cam/BackBtn" to="." method="_on_back_btn_pressed"]
-[connection signal="pressed" from="DeathCam/Button_Retry" to="." method="_on_button_retry_pressed"]
+[connection signal="pressed" from="DeathCam/Button_Retry" to="Madeline" method="RETRY"]
 [connection signal="pressed" from="DeathCam/Button_Exit" to="." method="_on_button_exit_pressed"]
-[connection signal="pressed" from="UI_Elements/PAUSEBTN" to="." method="_on_pausebtn_pressed"]
+[connection signal="pressed" from="UI_Elements/PAUSEBTN" to="Madeline" method="PAUSE"]
+[connection signal="value_changed" from="UI_Elements/Pause_Men/Assist_Invis/Assist_Engine_Speed" to="Madeline" method="CHANGED_ASSIST_ENGINE_SPEED"]
+[connection signal="toggled" from="UI_Elements/Pause_Men/Assist_Invis/Assist_Invuln" to="Madeline" method="INV_TOG"]
+[connection signal="toggled" from="UI_Elements/Pause_Men/Assist_Invis/Assist_Dash" to="Madeline" method="DASH_INF"]
+[connection signal="pressed" from="UI_Elements/Pause_Men/Unpause" to="Madeline" method="_on_unpause_pressed"]
+[connection signal="pressed" from="UI_Elements/Pause_Men/ASSist" to="Madeline" method="ASSIST_OPTIONS_VISIBLE"]
+[connection signal="pressed" from="UI_Elements/Pause_Men/Button" to="." method="Touch"]
+[connection signal="pressed" from="UI_Elements/Pause_Men/Button2" to="." method="Acc"]
+[connection signal="pressed" from="UI_Elements/Pause_Men/Button3" to="." method="Teleport"]
+[connection signal="pressed" from="UI_Elements/Pause_Men/Button4" to="Madeline" method="DELETE_SAVES"]
