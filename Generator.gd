@@ -19,9 +19,10 @@ func _ready():
 		Global.CheatsUsed = false
 	else:
 		Global.CheatsUsed = true
-	$DeathCam/Assist_Indicator.visible = false
+	%Assist_Indicator.visible = false
 	if Global.Cheat_Dash:
 		%Assist_Invuln.button_pressed = true
+		$Madeline/HairPink.visible = true
 	if Global.Cheat_Invuln:
 		%Assist_Invuln.button_pressed = true
 	match Engine.time_scale:
@@ -147,7 +148,16 @@ func _on_button_exit_pressed():
 	get_tree().quit()
 func Touch():
 	Global.SAVE("touch")
+	$UI_Elements/Pause_Men/Button.disabled = true; $UI_Elements/Pause_Men/Button2.disabled = false; $UI_Elements/Pause_Men/Button3.disabled = false
+	$UI_Elements/Touch_Dash2.visible = false
+	$UI_Elements/Touch_Controls.visible = true
 func Acc():
 	Global.SAVE("acc")
+	$UI_Elements/Pause_Men/Button2.disabled = true; $UI_Elements/Pause_Men/Button.disabled = false; $UI_Elements/Pause_Men/Button3.disabled = false
+	$UI_Elements/Touch_Controls.visible = false
+	$UI_Elements/Touch_Dash2.visible = true
 func Teleport():
 	Global.SAVE("TP")
+	$UI_Elements/Pause_Men/Button3.disabled = true; $UI_Elements/Pause_Men/Button2.disabled = false; $UI_Elements/Pause_Men/Button.disabled = false
+	$UI_Elements/Touch_Controls.visible = false
+	$UI_Elements/Touch_Dash2.visible = true

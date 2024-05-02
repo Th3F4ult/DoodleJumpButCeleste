@@ -4,6 +4,16 @@ func _ready():
 	var savefile = FileAccess.file_exists("user://CONTROLDATA")
 	if savefile: var data = FileAccess.open("user://CONTROLDATA",FileAccess.READ); ControlMode = data.get_var()
 	else: var data = FileAccess.open("user://CONTROLDATA",FileAccess.WRITE); data.store_var("touch")
+	match ControlMode:
+		"touch": 
+			get_node("/root/Level/UI_Elements/Pause_Men/Button").disabled = true
+			get_node("/root/Level/UI_Elements/Touch_Dash2").visible = false
+		"acc": 
+			get_node("/root/Level/UI_Elements/Pause_Men/Button2").disabled = true
+			get_node("/root/Level/UI_Elements/Touch_Controls").visible = false
+		"TP": 
+			get_node("/root/Level/UI_Elements/Touch_Controls").visible = false
+			get_node("/root/Level/UI_Elements/Pause_Men/Button3").disabled = true
 func reset():
 	GenTimes = 10
 	Points = 0

@@ -124,7 +124,7 @@ func DASH(cheat:bool):
 			Global.GenTimes = Global.GenTimes + 3
 			$DashParts.emitting = true
 			$HairBlue.visible = true
-			await get_tree().create_timer(1).timeout
+			await get_tree().create_timer(2).timeout
 			$HairBlue.visible = false
 			CanDash = true
 			Global.CanBeKilledbyPlatform = true
@@ -146,15 +146,15 @@ func _on_kill_area_body_entered(body):
 func DIE():
 	$PlayerHitbox.queue_free()
 	isDead = true
-	$"../DeathCam".make_current()
+	$"../UI_Elements/DeathScreen".visible = true
 	if Global.CheatsUsed or Global.Cheat_Dash or Global.Cheat_Invuln or Engine.time_scale != 1:
-		$"../DeathCam/Assist_Indicator".visible = true
-	$"../DeathCam/Label_Text_1".text = "You died!"
-	$"../DeathCam/Label_Text_2".text = "Points:"
-	$"../DeathCam/Label_Text_POINTS".text = str(Global.Points)
-	$"../DeathCam/Label_Text_3".text = "Strawberries:"
-	$"../DeathCam/Label_Text_STRAWBERRIES".text = str(Global.StrawBs)
-	$"../UI_Elements".visible = false
+		%Assist_Indicator.visible = true
+	$"../UI_Elements/DeathScreen/Label_Text_1".text = "You died!"
+	$"../UI_Elements/DeathScreen/Label_Text_2".text = "Points:"
+	$"../UI_Elements/DeathScreen/Label_Text_POINTS".text = str(Global.Points)
+	$"../UI_Elements/DeathScreen/Label_Text_3".text = "Strawberries:"
+	$"../UI_Elements/DeathScreen/Label_Text_STRAWBERRIES".text = str(Global.StrawBs)
+
 
 
 #func _on_touch_screen_button_pressed(): 
@@ -192,5 +192,5 @@ func INV_TOG(toggled_on):
 func DASH_INF(toggled_on):
 	Global.CheatsUsed = true
 	match toggled_on:
-		true: Global.Cheat_Dash = true; %Assist_dash_text.text = "Unlimited"
-		false: Global.Cheat_Dash = false; %Assist_dash_text.text = "Default"
+		true: Global.Cheat_Dash = true; %Assist_dash_text.text = "Unlimited"; $HairPink.visible = true
+		false: Global.Cheat_Dash = false; %Assist_dash_text.text = "Default"; $HairPink.visible = false

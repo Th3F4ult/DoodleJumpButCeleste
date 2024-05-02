@@ -159,62 +159,6 @@ shape = SubResource("RectangleShape2D_8d8lf")
 position = Vector2(109.5, 984)
 shape = SubResource("RectangleShape2D_fmb7u")
 
-[node name="DeathCam" type="Camera2D" parent="."]
-process_mode = 3
-position = Vector2(923, 824)
-zoom = Vector2(2, 2)
-
-[node name="Label_Text_1" type="Label" parent="DeathCam"]
-offset_left = -135.0
-offset_top = -270.0
-offset_right = -95.0
-offset_bottom = -247.0
-
-[node name="Label_Text_2" type="Label" parent="DeathCam"]
-offset_left = -135.0
-offset_top = -150.0
-offset_right = -95.0
-offset_bottom = -127.0
-
-[node name="Label_Text_POINTS" type="Label" parent="DeathCam"]
-offset_left = 107.0
-offset_top = -150.0
-offset_right = 147.0
-offset_bottom = -127.0
-
-[node name="Label_Text_3" type="Label" parent="DeathCam"]
-offset_left = -135.0
-offset_top = -11.0
-offset_right = -95.0
-offset_bottom = 12.0
-
-[node name="Label_Text_STRAWBERRIES" type="Label" parent="DeathCam"]
-offset_left = 102.0
-offset_top = -11.0
-offset_right = 142.0
-offset_bottom = 12.0
-
-[node name="Button_Retry" type="Button" parent="DeathCam"]
-offset_left = -133.0
-offset_top = 37.0
-offset_right = -54.0
-offset_bottom = 68.0
-text = "Try again"
-
-[node name="Button_Exit" type="Button" parent="DeathCam"]
-offset_left = -133.0
-offset_top = 108.0
-offset_right = -54.0
-offset_bottom = 139.0
-text = "Exit"
-
-[node name="Assist_Indicator" type="TextureRect" parent="DeathCam"]
-offset_left = 51.0
-offset_top = 233.0
-offset_right = 147.0
-offset_bottom = 273.0
-texture = ExtResource("7_yrv7g")
-
 [node name="UI_Elements" type="CanvasLayer" parent="."]
 process_mode = 3
 layer = 2
@@ -313,6 +257,7 @@ offset_bottom = 204.0
 
 [node name="Assist_Engine_Speed" type="HSlider" parent="UI_Elements/Pause_Men/Assist_Invis"]
 process_mode = 3
+layout_mode = 0
 offset_left = 115.0
 offset_top = 64.0
 offset_right = 257.0
@@ -339,6 +284,7 @@ text = "Game Speed:"
 
 [node name="Assist_Invuln" type="CheckButton" parent="UI_Elements/Pause_Men/Assist_Invis"]
 unique_name_in_owner = true
+layout_mode = 0
 offset_left = 90.0
 offset_top = 131.0
 offset_right = 255.0
@@ -363,6 +309,7 @@ offset_bottom = 25.0
 text = "OFF"
 
 [node name="Assist_Dash" type="CheckButton" parent="UI_Elements/Pause_Men/Assist_Invis"]
+layout_mode = 0
 offset_left = 90.0
 offset_top = 221.0
 offset_right = 255.0
@@ -388,6 +335,7 @@ text = "1"
 
 [node name="Unpause" type="Button" parent="UI_Elements/Pause_Men"]
 process_mode = 3
+layout_mode = 0
 offset_left = -88.0
 offset_top = -192.0
 offset_right = 111.0
@@ -440,15 +388,88 @@ text = "DELETE SAVES"
 
 [node name="DeathScreen" type="Control" parent="UI_Elements"]
 visible = false
+z_index = 5
 layout_mode = 3
 anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
+offset_left = 386.0
+offset_top = 463.0
+offset_right = 426.0
+offset_bottom = 503.0
+
+[node name="ColorRect2" type="ColorRect" parent="UI_Elements/DeathScreen"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -386.0
+offset_top = -463.0
+offset_right = 222.0
+offset_bottom = 649.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.670588, 0.6, 0.847059, 1)
+
+[node name="Label_Text_1" type="Label" parent="UI_Elements/DeathScreen"]
+offset_left = -135.0
+offset_top = -270.0
+offset_right = -95.0
+offset_bottom = -247.0
+scale = Vector2(2, 2)
+
+[node name="Label_Text_2" type="Label" parent="UI_Elements/DeathScreen"]
+offset_left = -135.0
+offset_top = -150.0
+offset_right = -95.0
+offset_bottom = -127.0
+scale = Vector2(2, 2)
+
+[node name="Label_Text_POINTS" type="Label" parent="UI_Elements/DeathScreen"]
+offset_left = 107.0
+offset_top = -150.0
+offset_right = 147.0
+offset_bottom = -127.0
+scale = Vector2(2, 2)
+
+[node name="Label_Text_3" type="Label" parent="UI_Elements/DeathScreen"]
+offset_left = -135.0
+offset_top = -11.0
+offset_right = -95.0
+offset_bottom = 12.0
+scale = Vector2(2, 2)
+
+[node name="Label_Text_STRAWBERRIES" type="Label" parent="UI_Elements/DeathScreen"]
+offset_left = 102.0
+offset_top = -11.0
+offset_right = 142.0
+offset_bottom = 12.0
+scale = Vector2(2, 2)
+
+[node name="Button_Retry" type="Button" parent="UI_Elements/DeathScreen"]
+offset_left = -133.0
+offset_top = 140.0
+offset_right = -54.0
+offset_bottom = 171.0
+scale = Vector2(2, 2)
+text = "Try again"
+
+[node name="Button_Exit" type="Button" parent="UI_Elements/DeathScreen"]
+offset_left = -134.0
+offset_top = 226.0
+offset_right = -55.0
+offset_bottom = 257.0
+scale = Vector2(2, 2)
+text = "Exit"
+
+[node name="Assist_Indicator" type="TextureRect" parent="UI_Elements/DeathScreen"]
+unique_name_in_owner = true
+offset_left = 147.0
+offset_top = 598.0
+offset_right = 243.0
+offset_bottom = 638.0
+texture = ExtResource("7_yrv7g")
 
 [connection signal="body_entered" from="KillArea" to="Madeline" method="_on_kill_area_body_entered"]
 [connection signal="body_entered" from="Strawberry Gen" to="." method="_on_strawberry_gen_body_entered"]
-[connection signal="pressed" from="DeathCam/Button_Retry" to="Madeline" method="RETRY"]
-[connection signal="pressed" from="DeathCam/Button_Exit" to="." method="_on_button_exit_pressed"]
 [connection signal="pressed" from="UI_Elements/PAUSEBTN" to="Madeline" method="PAUSE"]
 [connection signal="value_changed" from="UI_Elements/Pause_Men/Assist_Invis/Assist_Engine_Speed" to="Madeline" method="CHANGED_ASSIST_ENGINE_SPEED"]
 [connection signal="toggled" from="UI_Elements/Pause_Men/Assist_Invis/Assist_Invuln" to="Madeline" method="INV_TOG"]
@@ -459,3 +480,5 @@ offset_bottom = 40.0
 [connection signal="pressed" from="UI_Elements/Pause_Men/Button2" to="." method="Acc"]
 [connection signal="pressed" from="UI_Elements/Pause_Men/Button3" to="." method="Teleport"]
 [connection signal="pressed" from="UI_Elements/Pause_Men/Button4" to="Madeline" method="DELETE_SAVES"]
+[connection signal="pressed" from="UI_Elements/DeathScreen/Button_Retry" to="Madeline" method="RETRY"]
+[connection signal="pressed" from="UI_Elements/DeathScreen/Button_Exit" to="." method="_on_button_exit_pressed"]

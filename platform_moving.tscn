@@ -1,8 +1,20 @@
-[gd_scene load_steps=7 format=3 uid="uid://cgodejmjlaecb"]
+[gd_scene load_steps=6 format=3 uid="uid://cgodejmjlaecb"]
 
-[ext_resource type="Script" path="res://platform_moving.gd" id="1_x8b1t"]
-[ext_resource type="Script" path="res://Path.gd" id="2_lwcei"]
 [ext_resource type="Texture2D" uid="uid://4hnhq3osinw3" path="res://ASSETS/Platforms/Regular-1/0.png" id="2_pgg7c"]
+
+[sub_resource type="GDScript" id="GDScript_ijnb0"]
+script/source = "extends Node2D
+@onready var follow :PathFollow2D = $Path2D/PathFollow2D
+var rng = RandomNumberGenerator.new()
+var MOVERNG = rng.randf_range(50, 300)
+func _physics_process(delta):
+	follow.set_progress(follow.get_progress() + MOVERNG * delta)
+
+func _on_point_adder_body_exited(body):
+	if body.is_in_group(\"player\"):
+		Global.CanGetPoint = true
+		$Path2D/PathFollow2D/PointAdder.queue_free()
+"
 
 [sub_resource type="Curve2D" id="Curve2D_drgrq"]
 _data = {
@@ -17,7 +29,7 @@ size = Vector2(50, 14.4996)
 size = Vector2(51, 20)
 
 [node name="Platform-Moving" type="Node2D"]
-script = ExtResource("1_x8b1t")
+script = SubResource("GDScript_ijnb0")
 
 [node name="Path2D" type="Path2D" parent="."]
 position = Vector2(1.5, 2.38419e-07)
@@ -46,7 +58,6 @@ texture = ExtResource("2_pgg7c")
 
 [node name="StaticBody2D" type="StaticBody2D" parent="Path2D/PathFollow2D"]
 position = Vector2(-453.647, 3.91006e-05)
-script = ExtResource("2_lwcei")
 
 [node name="HitboxThru" type="CollisionShape2D" parent="Path2D/PathFollow2D/StaticBody2D"]
 position = Vector2(499.765, -4.36908e-05)

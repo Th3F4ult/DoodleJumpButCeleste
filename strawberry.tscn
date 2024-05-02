@@ -68,9 +68,8 @@ script = ExtResource("1_cggog")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 scale = Vector2(0.5, 0.5)
 sprite_frames = SubResource("SpriteFrames_mweps")
-animation = &"Grab"
-frame = 4
-frame_progress = 1.0
+animation = &"Idle"
+frame_progress = 0.862172
 
 [node name="StrawArea" type="Area2D" parent="."]
 
